@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parking Management System</title>
+
+    <style>
+        body {
+            background: #121212;
+            font-family: "Segoe UI", sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            padding: 20px;
+            background: #1f1f1f;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding-top: 20px;
+        }
+
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #03a9f4;
+        }
+
+        input, select {
+            width: 98%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 6px;
+            border: none;
+            background: #2c2c2c;
+            color: white;
+        }
+
+        button {
+            background: #03a9f4;
+            border: none;
+            width: 200px;
+            margin-top: 12px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0288d1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #0288d1;
+        }
+
+        tr:nth-child(even) {
+            background: #1f1f1f;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input, .search-bar select {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">🚗 PARKING MANAGEMENT SYSTEM </div>
+
+<div class="container">
+
+    <!-- DASHBOARD SECTION -->
+    <div class="card">
+        <h2>Dashboard</h2>
+        <p><b>Bicycle Slots:</b> <span id="slot_bicycle">78</span></p>
+        <p><b>Bike Slots:</b> <span id="slot_bike">100</span></p>
+        <p><b>Car Slots:</b> <span id="slot_car">250</span></p>
+        <button onclick="alert('Connect with backend using API')">Refresh Dashboard</button>
+    </div>
+
+    <!-- VEHICLE ENTRY FORM -->
+    <div class="card">
+        <h2>Vehicle Entry</h2>
+
+        <input type="text" id="vno" placeholder="Vehicle Number (XX-00-XXXX)">
+        <select id="vtype">
+            <option value="">Select Vehicle Type</option>
+            <option value="Bicycle">Bicycle</option>
+            <option value="Bike">Bike</option>
+            <option value="Car">Car</option>
+        </select>
+        <input type="text" id="vname" placeholder="Vehicle Name">
+        <input type="text" id="owner" placeholder="Owner Name">
+        <input type="date" id="date">
+        <input type="time" id="entrytime">
+
+        <button onclick="addVehicle()">Add Vehicle</button>
+    </div>
+
+    <!-- REMOVE VEHICLE -->
+    <div class="card">
+        <h2>Remove Vehicle</h2>
+        <input type="text" id="remove_vno" placeholder="Enter Vehicle Number">
+        <button onclick="removeVehicle()">Remove</button>
+    </div>
+
+    <!-- BILLING -->
+    <div class="card">
+        <h2>Billing</h2>
+
+        <input type="text" id="bill_vno" placeholder="Vehicle Number">
+        <input type="number" id="hours" placeholder="Hours Parked">
+        <input type="time" id="exittime">
+
+        <button onclick="generateBill()">Generate Bill</button>
+    </div>
+
+    <!-- VIEW VEHICLES TABLE -->
+    <div class="card">
+        <h2>Parked Vehicles</h2>
+
+        <!-- Search & Filter Bar -->
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search by Vehicle No or Owner">
+            <select id="filter_type">
+                <option value="All">All Types</option>
+                <option value="Bicycle">Bicycle</option>
+                <option value="Bike">Bike</option>
+                <option value="Car">Car</option>
+            </select>
+        </div>
+
+        <table id="vehicleTable">
+            <thead>
+                <tr>
+                    <th>Vehicle Number</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Owner</th>
+                    <th>Date</th>
+                    <th>Entry Time</th>
+                    <th>Exit Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows -->
+            </tbody>
+        </table>
+
+        <button onclick="exportCSV()">Export to CSV</button>
+    </div>
+
+</div>
+
+<script>
+
+let vehicles = []; // Dummy storage (real system uses backend)
+
+function addVehicle() {
+    let data = {
+        vno: document.getElementById("vno").value,
+        type: document.getElementById("vtype").value,
+        name: document.getElementById("vname").value,
+        owner: document.getElementById("owner").value,
+        date: document.getElementById("date").value,
+        entry: document.getElementById("entrytime").value,
+        exit: "------"
+    };
+
+    vehicles.push(data);
+    alert("Vehicle Added (Frontend Only)");
+    renderTable();
+}
+
+function removeVehicle() {
+    let v = document.getElementById("remove_vno").value;
+    vehicles = vehicles.filter(x => x.vno !== v);
+    alert("Vehicle Removed (Frontend Only)");
+    renderTable();
+}
+
+function generateBill() {
+    alert("Bill Generated (Frontend Only)");
+}
+
+function renderTable() {
+    let tbody = document.querySelector("#vehicleTable tbody");
+    tbody.innerHTML = "";
+
+    let search = document.getElementById("search").value.toLowerCase();
+    let filter = document.getElementById("filter_type").value;
+
+    vehicles
+        .filter(v => 
+            (filter === "All" || v.type === filter) &&
+            (v.vno.toLowerCase().includes(search) || v.owner.toLowerCase().includes(search))
+        )
+        .forEach(v => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${v.vno}</td>
+                    <td>${v.type}</td>
+                    <td>${v.name}</td>
+                    <td>${v.owner}</td>
+                    <td>${v.date}</td>
+                    <td>${v.entry}</td>
+                    <td>${v.exit}</td>
+                </tr>
+            `;
+        });
+}
+
+function exportCSV() {
+    let csv = "Vehicle_Number,Type,Name,Owner,Date,Entry,Exit\n";
+
+    vehicles.forEach(v => {
+        csv += `${v.vno},${v.type},${v.name},${v.owner},${v.date},${v.entry},${v.exit}\n`;
+    });
+
+    let blob = new Blob([csv], { type: "text/csv" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "parked_vehicles.csv";
+    link.click();
+}
+
+</script>
+
+</body>
+</html>
