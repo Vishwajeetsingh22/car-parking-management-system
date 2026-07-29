@@ -1,20 +1,158 @@
-# Mini_Project
-Smart Parking System
-Project Title: Smart Parking System
+# 🚗 Car Parking Management System
 
-Technology Used: Python
+A web-based **Car Parking Management System** developed to simplify parking space management. The system allows users to manage vehicle parking records, allocate parking slots, calculate parking charges, and monitor parking availability through an easy-to-use interface.
 
-Institution/Event: Project Demonstration Event, CIET College, Coimbatore
+---
 
-Project Description:
-The Smart Parking System is a Python-based application developed to simplify and automate the process of vehicle parking management. The system allows users to register vehicle entries and exits, track available parking slots, and generate reports on parking activity. It is designed to improve efficiency, reduce manual errors, and provide real-time parking slot updates for users and administrators.
+## 📌 Project Overview
 
-Key Features:
-Vehicle Entry/Exit Logging – Records vehicle number, entry time, and exit time automatically.
-Slot Allocation System – Dynamically allocates and deallocates parking slots based on availibility.
-Real-Time Slot Monitoring – Displays total, occupied, and free parking slots instantly.
-Admin Interface – Allows administrators to view logs, update slot status, and manage records.
-User-Friendly Interface – Designed using Python’s Tkinter or terminal-based UI for ease of interaction.
+The Car Parking Management System is designed to automate the process of managing vehicle parking in malls, offices, apartments, colleges, and other parking facilities. It reduces manual work by maintaining parking records digitally and improving parking efficiency.
 
-Outcome:
-This system effectively demonstrates the use of Python for real-world problem solving in smart infrastructure. It received positive feedback during the project demonstration event at CIET College, Coimbatore, highlighting its practicality and potential for use in commercial/residential parking lots.
+---
+
+## ✨ Features
+
+- User-friendly interface
+- Add new vehicle details
+- Allocate parking slots
+- View available and occupied parking spaces
+- Vehicle entry and exit management
+- Automatic parking fee calculation
+- Search vehicle records
+- Update and delete parking records
+- Secure data storage using a database
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+- Python
+- Flask
+
+### Database
+- SQLite
+
+### Development Tools
+- Visual Studio Code
+- Git & GitHub
+
+---
+
+## 📂 Project Structure
+
+```
+Car-Parking-Management-System/
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   ├── dashboard.html
+│   ├── add_vehicle.html
+│   ├── parking_slots.html
+│   └── ...
+│
+├── app.py
+├── database.db
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+---
+
+## ⚙️ Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/Vishwajeetsingh22/car-parking-management-system.git
+```
+
+2. Navigate to the project folder
+
+```bash
+cd car-parking-management-system
+```
+
+3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Run the application
+
+```bash
+python app.py
+```
+
+5. Open your browser and visit
+
+```
+http://127.0.0.1:5000/
+```
+
+---
+
+## 📸 Screenshots
+
+Add screenshots of your application here.
+
+Example:
+
+- Home Page
+- Login Page
+- Dashboard
+- Parking Slot Management
+- Vehicle Entry
+- Vehicle Exit
+
+---
+
+## 🎯 Objectives
+
+- Automate parking management.
+- Reduce manual paperwork.
+- Improve parking slot utilization.
+- Maintain accurate parking records.
+- Generate parking reports efficiently.
+
+---
+
+## 🚀 Future Enhancements
+
+- Online parking slot reservation
+- QR Code based parking
+- RFID integration
+- Payment Gateway
+- Email and SMS notifications
+- Admin analytics dashboard
+- Mobile application support
+
+---
+
+## 👨‍💻 Developed By
+
+**Vishwajeet Singh**
+
+MCA Student  
+Jain (Deemed-to-be University), Bangalore
+
+GitHub: https://github.com/Vishwajeetsingh22
+
+---
+
+## 📄 License
+
+This project is developed for educational and learning purposes.
